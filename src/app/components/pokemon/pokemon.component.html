@@ -1,13 +1,34 @@
 <p></p>
+
 <div *ngIf="pokeArr" class="card" style="width: 20rem;">
   <img *ngIf="pokeArr.sprites" src="{{ pokeArr.sprites.front_default }}" class="card-img-top" alt="{{ pokeArr.name }}">
   <div class="card-body">
     <h5 *ngIf="pokeArr.name" class="card-title">{{ pokeArr.name.charAt(0).toUpperCase() + pokeArr.name.slice(1) }}</h5>
-    <p *ngIf="pokeArr.types" class="card-text">Types: {{ pokeArr.types[0].type.name}}</p>
+    <div class="row no-gutters">
+      <div class="col-md-5">
+        <b *ngIf="pokeArr.types" class="card-text">Types:</b>
+        <ul class="card-text">
+          <li *ngFor="let type of pokeArr.types">
+            <span>{{ type.type.name }}</span>
+            
+          </li>
+          </ul>
+      </div>
+      <div class="col-md-7">
+        <b *ngIf="pokeArr.abilities" class="card-text">Abilities:</b>
+        <ul class="card-text">
+          <li *ngFor="let ability of pokeArr.abilities">
+            <span>{{ ability.ability.name }}</span>
+            
+          </li>
+        </ul>
+      </div>
+    </div>
+    <p></p>
     <button class="btn btn-primary" (click)="getPoke()">Get new</button>
   </div>
+  
   <div class="progress">
-    
     <div class="progress-bar progress-bar-striped progress-bar-animated" aria-valuemin="0" aria-valuemax="500" [style.width]="barNum + '%'">
     	{{ barNum }} %
     </div>
